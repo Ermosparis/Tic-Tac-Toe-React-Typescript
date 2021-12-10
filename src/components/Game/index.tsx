@@ -10,8 +10,8 @@ const Game = () => {
   const [player, setPlayer] = React.useState("X");
   const [boardCopy, setBoardCopy] = React.useState<any | null>(null);
   const boardArray: any[] | null = [];
-  const rows = 7;
-  const cols = 7;
+  const rows = 5;
+  const cols = 5;
 
   const checkWinner = (arr: any[]) => {
     for (let r = 0; r < arr.length; r += 1) {
@@ -29,29 +29,61 @@ const Game = () => {
           }
         }
 
+        const minusOneR = r - 1 !== -1;
+        const minusOneC = c - 1 !== -1;
+
+        const plusOneR = r + 1 < arr.length;
+        const plusOneC = c + 1 < arr[r].length;
+
+        const minusTwoR = r - 2 !== -1;
+        const minusTwoC = c - 2 !== -1;
+
+        const plusTwoR = r + 2 < arr.length;
+        const plusTwoC = c + 2 < arr[r].length;
+
         if (
-          (r - 1 !== -1 &&
-            c - 1 !== -1 &&
+          (minusOneR &&
+            minusOneC &&
+            plusOneR &&
+            plusOneC &&
             arr[r][c] === player &&
             arr[r - 1][c + 1] === player &&
             arr[r + 1][c - 1] === player) ||
-          (r - 1 !== -1 &&
-            c - 1 !== -1 &&
+          (minusOneR &&
+            minusOneC &&
+            plusOneR &&
+            plusOneC &&
             arr[r][c] === player &&
             arr[r - 1][c + 1] === player &&
             arr[r + 1][c - 1] === player) ||
-          (r + 2 < arr.length &&
-            c + 2 !== arr[r].length &&
+          (plusOneR &&
+            plusOneC &&
+            plusTwoR &&
+            plusTwoC &&
             arr[r][c] === player &&
             arr[r + 1][c + 1] === player &&
             arr[r + 2][c + 2] === player) ||
-          (r - 2 < arr.length &&
-            c - 2 !== arr[r].length &&
+          (plusOneR &&
+            minusOneC &&
+            plusTwoR &&
+            minusTwoC &&
             arr[r][c] === player &&
             arr[r + 1][c - 1] === player &&
             arr[r + 2][c - 2] === player) ||
-          (arr[r][c] === player && arr[r - 1][c - 1] === player && arr[r - 2][c - 2] === player) ||
-          (arr[r][c] === player && arr[r - 1][c + 1] === player && arr[r - 2][c + 2] === player)
+          (minusOneR &&
+            minusOneC &&
+            minusTwoR &&
+            minusTwoC &&
+            arr[r][c] === player &&
+            arr[r - 1][c - 1] === player &&
+            arr[r - 2][c - 2] === player) ||
+          (minusOneR &&
+            plusOneC &&
+            minusTwoR &&
+            plusTwoC &&
+            arr[r][c] === player &&
+            arr[r - 1][c + 1] === player &&
+            arr[r - 2][c + 2] === player)
         ) {
           console.log(`Player ${player} wins!`);
           return;
