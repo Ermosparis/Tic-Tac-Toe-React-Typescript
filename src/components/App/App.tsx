@@ -1,14 +1,10 @@
-import React from "react";
-import Board from "../Board";
+import Game from "../Game";
 import "./styles.scss";
 
-const App = () => {
-  const [player, setPlayer] = React.useState(null);
-  return (
-    <div className="container">
-      <h1>Tic Tack Toe</h1>
-      <Board player={player} setPlayer={setPlayer} />
-    </div>
-  );
-};
+const App = () => (
+  <div className="container">
+    <h1>Tic Tack Toe</h1>
+    <Game />
+  </div>
+);
 export default App;

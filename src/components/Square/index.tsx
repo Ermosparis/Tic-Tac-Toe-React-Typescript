@@ -2,9 +2,14 @@
 import React from "react";
 import "./styles.scss";
 
-type SquareProps = { player: string | null; setPlayer: Function };
+type SquareProps = {
+  player: string | null;
+  setPlayer: Function;
+  getCoordinatesOfClickedCell: Function;
+  coordinates: object;
+};
 
-const Square = ({ player, setPlayer }: SquareProps) => {
+const Square = ({ player, setPlayer, getCoordinatesOfClickedCell, coordinates }: SquareProps) => {
   const [value, setValue] = React.useState<string | null>(null);
   const handleClick = () => {
     if (value) {
@@ -13,9 +18,11 @@ const Square = ({ player, setPlayer }: SquareProps) => {
     if (player === "X" || player === null) {
       setValue("X");
       setPlayer("O");
+      getCoordinatesOfClickedCell(coordinates);
     } else if (player === "O") {
       setValue("O");
       setPlayer("X");
+      getCoordinatesOfClickedCell(coordinates);
     }
   };
   return (
