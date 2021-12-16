@@ -1,5 +1,5 @@
 {
-  "name": "react-template",
+  "name": "tic-tac-toe-react-typescript-algorithme-minimax",
   "version": "1.0.0",
   "description": "Template for React Apps",
   "main": "index.js",
