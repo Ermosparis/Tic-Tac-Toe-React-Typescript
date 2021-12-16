@@ -1,33 +1,23 @@
 /* eslint-disable no-nested-ternary */
-import React from "react";
 import "./styles.scss";
 
 type SquareProps = {
-  player: string | null;
-  setPlayer: Function;
-  getCoordinatesOfClickedCell: Function;
+  drawXandO: Function;
   coordinates: object;
+  cellValue: string;
+  disable: boolean;
 };
 
-const Square = ({ player, setPlayer, getCoordinatesOfClickedCell, coordinates }: SquareProps) => {
-  const [value, setValue] = React.useState<string | null>(null);
+const Square = ({ drawXandO, coordinates, cellValue, disable }: SquareProps) => {
   const handleClick = () => {
-    if (value) {
+    if (cellValue === "X" || cellValue === "O") {
       return;
     }
-    if (player === "X" || player === null) {
-      setValue("X");
-      setPlayer("O");
-      getCoordinatesOfClickedCell(coordinates);
-    } else if (player === "O") {
-      setValue("O");
-      setPlayer("X");
-      getCoordinatesOfClickedCell(coordinates);
-    }
+    drawXandO(coordinates);
   };
   return (
-    <button className="square" type="button" onClick={handleClick}>
-      <span>{value}</span>
+    <button className="square" type="button" onClick={handleClick} disabled={disable}>
+      <span>{cellValue}</span>
     </button>
   );
 };

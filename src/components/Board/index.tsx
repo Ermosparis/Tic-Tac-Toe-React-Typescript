@@ -2,52 +2,34 @@ import Square from "../Square";
 import "./styles.scss";
 
 type BoardProps = {
-  player: string | null;
-  setPlayer: Function;
-  rows: number;
-  cols: number;
-  boardArray: Array<object>;
-
-  getCoordinatesOfClickedCell: Function;
+  board: Array<any>;
+  drawXandO: Function;
+  winner: string | null;
+  disable: boolean;
+  restartGame: () => void;
 };
 
-const Board = ({
-  player,
-  setPlayer,
-  rows,
-  cols,
-  boardArray,
-  getCoordinatesOfClickedCell,
-}: BoardProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  const drawBoard = (rows: number, cols: number) => {
-    const board = [];
-    for (let r = 0; r < rows; r += 1) {
-      const row = [];
-      const rowArray = [];
-      for (let c = 0; c < cols; c += 1) {
-        row.push(
+const Board = ({ drawXandO, board, winner, disable, restartGame }: BoardProps) => (
+  <div className="board">
+    {board.map((row, index) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <div className="row" key={`row${row}${index}`}>
+        {row.map((cell: { row: number; col: number; cellValue: string }) => (
           <Square
-            key={r + c}
-            player={player}
-            setPlayer={setPlayer}
-            getCoordinatesOfClickedCell={getCoordinatesOfClickedCell}
-            coordinates={{ row: r, col: c }}
+            cellValue={cell.cellValue}
+            key={cell.row + cell.col}
+            drawXandO={drawXandO}
+            coordinates={{ row: cell.row, col: cell.col }}
+            disable={disable}
           />
-        );
-        rowArray.push({ row: r, col: c });
-      }
-      boardArray.push(rowArray);
-      board.push(
-        <div className="row" key={`row${r}`}>
-          {row}
-        </div>
-      );
-    }
-    return <div className="rows-holder">{board}</div>;
-  };
-
-  return <div className="board">{drawBoard(rows, cols)}</div>;
-};
+        ))}
+      </div>
+    ))}
+    <h1>{winner && (winner !== "tie" ? `The winner is ${winner}` : `It's a tie!`)}</h1>
+    <button className="restartBtn" type="button" onClick={restartGame}>
+      Restart Game
+    </button>
+  </div>
+);
 
 export default Board;
