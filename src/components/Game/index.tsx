@@ -10,13 +10,13 @@ interface Coordinate {
 const Game = () => {
   const rows = 3;
   const cols = 3;
-  const { checkWinner, bestMove, checkFreeCells } = helpers;
+  const { checkWinner, bestMove, checkFreeCells, drawBoard } = helpers;
   const [disable, setDisable] = React.useState<boolean>(false);
   const [winner, setWinner] = React.useState<string | null>(null);
-  const [board, setBoard] = React.useState(helpers.drawBoard(rows, cols));
+  const [board, setBoard] = React.useState(drawBoard(rows, cols));
 
   const restartGamed = () => {
-    setBoard(helpers.drawBoard(rows, cols));
+    setBoard(drawBoard(rows, cols));
     setDisable(false);
     setWinner(null);
   };
