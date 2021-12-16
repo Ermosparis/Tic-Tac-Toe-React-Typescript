@@ -26,9 +26,11 @@ const Board = ({ drawXandO, board, winner, disable, restartGame }: BoardProps) =
       </div>
     ))}
     <h1>{winner && (winner !== "tie" ? `The winner is ${winner}` : `It's a tie!`)}</h1>
-    <button className="restartBtn" type="button" onClick={restartGame}>
-      Restart Game
-    </button>
+    {winner && (
+      <button className="restartBtn" type="button" onClick={restartGame}>
+        Restart Game
+      </button>
+    )}
   </div>
 );
 

@@ -18,6 +18,7 @@ const Game = () => {
   const restartGamed = () => {
     setBoard(helpers.drawBoard(rows, cols));
     setDisable(false);
+    setWinner(null);
   };
 
   const makeAImove = (arr: Array<any>) => {
