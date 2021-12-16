@@ -36,7 +36,7 @@ const Game = () => {
     }
   };
 
-  const drawXandO = async (coord: Coordinate) => {
+  const drawXandO = (coord: Coordinate) => {
     board[coord.row][coord.col].cellValue = "X";
     const boardCopy = JSON.parse(JSON.stringify(board));
     setBoard(boardCopy);
